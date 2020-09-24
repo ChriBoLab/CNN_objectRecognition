@@ -1,9 +1,10 @@
 None
 # Εισαγωγή
 
-Καλούμαστε εφαρμόσουμε ένα CNN μοντέλο για ταξινόμηση στο ίδιο dataset που
-χρησιμοποιήσαμε στην εργασία 3 και να πραγματοποιήσουμε μια συγκριτική
+Καλούμαστε εφαρμόσουμε ένα CNN μοντέλο για ταξινόμηση γατών και σκύλων και να πραγματοποιήσουμε μια συγκριτική
 αξιολόγηση μεταξύ της τεχνικής BoVW.
+
+# Dataset
 
 Πιο συγκεκριμένα έχοντας στα χέρια μας εικόνες 2 κατηγόριων (Γάτες - Σκύλοι)
 συνολικά 500 εικόνες από την κάθε κατηγορία θα φτιάξουμε ένα μοντέλο το οποίο θα
@@ -21,9 +22,30 @@ None
 - Validation-set = 60 εικόνες Σκύλων + 60 εικόνες Γατών.
 
 
-Επέλεξα να τρέξω το μοντέλο στο GoogleColab ώστε να εκμεταλευτώ την Tesla k80
-gpu που παρέχει η google.
 
+Τις εικόνες με τις γάτες και σκύλους μπορούμε να τις καταβάσουμε απο αυτόν τον σύνδεσμο [Cats & dogs dataset](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
+
+H δομή:   
+   
+```bash
+C:.
+└───80_20
+    ├───Test
+    │   ├───Cat
+    |   |    ├─── 0000.jpg
+    │   └───Dog
+    |        ├─── 0000.jpg
+    ├───Train
+    │   ├───Cat
+    |   |    ├─── 0000.jpg
+    │   └───Dog
+    |        ├─── 0000.jpg
+    └───Validation
+        ├───Cat
+        |    ├─── 0000.jpg
+        └───Dog
+             ├─── 0000.jpg
+```
 Πριν δούμε τον κωδικά πάμε πρώτα να δούμε την δομή της βάσης μας.
 
 Στο RootDirectory θα πρέπει να βρίσκονται οι παρακάτω φάκελοι:
@@ -38,8 +60,11 @@ gpu που παρέχει η google.
 την ονομασία.
 
 
+Επέλεξα να τρέξω το μοντέλο στο GoogleColab ώστε να εκμεταλευτώ την Tesla k80
+gpu που παρέχει η google.
 
-Η εργασία αυτή αποτελείται από 3 python αρχεία:
+
+Το project αυτο αποτελείται από 3 python αρχεία:
 
 
 Με το πρώτο αρχείο το οποίο ονομάζεται DataLoadClassif.py και θα το
@@ -49,29 +74,18 @@ gpu που παρέχει η google.
 
 Το δεύτερο αρχείο ονομάζεται RunTheModel.ipynb και θα το χρησιμοποιήσουμε για να
 κάνουμε την αρχικοποίηση και εκπαίδευση του μοντέλου .
-https://colab.research.google.com/drive/12-BvZW8SOACHihMoxhHBUg_z4rn7ICeZ?usp=sharing
+[RunTheModel.ipynb](https://colab.research.google.com/drive/12-BvZW8SOACHihMoxhHBUg_z4rn7ICeZ?usp=sharing)
 
 Τέλος το τρίτο αρχείο ονομάζεται evaluateTheModel.ipynb και θα το
 χρησιμοποιήσουμε για να αξιολογήσουμε το μοντέλο μας.
-https://colab.research.google.com/drive/1K-POfrpiY0CUloxNb5wMWpmeqODiJmx8?usp=sharing
+[evaluateTheModel.ipynb](https://colab.research.google.com/drive/1K-POfrpiY0CUloxNb5wMWpmeqODiJmx8?usp=sharing)
 
 # Αποτελέσματα
 
 
-```python
-import matplotlib.image as mpimg 
-import matplotlib.pyplot as plt
-from matplotlib import rcParams
 
-rcParams['figure.figsize'] = 30,40
-image = mpimg.imread('Inputs/80_20ratio.png') 
-plt.imshow(image) 
-```
-
-```python
-image = mpimg.imread('Inputs/60_40ratio.png') 
-plt.imshow(image) 
-```
+![60 40](img/60_40ratio.png)
+![60 40](img/80_20ratio.png)
 
 Είναι φανερό ότι ο συνδυασμός KNN SIFT και SVM από την προηγουμένη άσκηση
 υπερισχύει του CNN με το CNN να έχει ποσοστό επιτυχίας κοντά 50%. Ο λόγος που
